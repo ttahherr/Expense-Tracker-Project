@@ -1,3 +1,6 @@
+using Expense_Tracker.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace Expense_Tracker
 {
     public class Program
@@ -5,9 +8,9 @@ namespace Expense_Tracker
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<ApplicationDbContext>
+            (option => option.UseSqlServer(builder.Configuration.GetConnectionString("Database")));
 
             var app = builder.Build();
 
